@@ -8,3 +8,12 @@ class JobStatus(str, Enum):
     running = 'running'
     completed = 'completed'
     failed = 'failed'
+class TimingBatchStatus(str, Enum):
+    pending = 'pending'
+    blocked = 'blocked'
+    ready = 'ready'
+    released = 'released'
+class TimingRecordStatus(str, Enum):
+    pending = 'pending'
+    converted = 'converted'
+    blocked = 'blocked'

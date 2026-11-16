@@ -12,7 +12,10 @@ def metadata():
             "parameters": [{"key": "team", "label": "试点小组", "type": "select", "default": "全部", "options": [{"value": x, "label": x} for x in ["全部", "一组", "二组", "三组", "四组"]]}, {"key": "confidence", "label": "置信度", "type": "select", "default": "0.95", "options": [{"value": str(x), "label": f"{x*100:g}%"} for x in [.9, .95, .99]]}],
             "workbench_title": "人员配对改善核验", "action_label": "计算配对差与区间", "unit": "秒", "accent": "oklch(47% 0.075 248)", "style": "blueprint",
             "seed_story": ["07:50 改善员导入 BL_route_retest.csv，共 80 人。", "08:10 核对 OP-001 至 OP-080 的前后测时完整。", "08:30 选择全部小组、95% 置信区间。", "08:35 执行配对检验，查看平均节省秒数。", "08:50 打开逐人差值，核对反向改善样本。", "09:10 单独选择四组，比较改善差异。", "09:30 导出班组简报，安排负改善人员的路线走查。"],
-            "method": "逐人差值 d=before−after；配对 t=mean(d)/(sd(d)/√n)，自由度 n−1；置信区间由 t 分布给出；标准化配对效应 dz=mean(d)/sd(d)。", "limitations": ["顺序、学习效应可能混入路线效果", "不对个人绩效作评价", "需保持复测订单难度和测时口径一致"]}
+            "method": "逐人差值 d=before−after；配对 t=mean(d)/(sd(d)/√n)，自由度 n−1；置信区间由 t 分布给出；标准化配对效应 dz=mean(d)/sd(d)。", "limitations": ["顺序、学习效应可能混入路线效果", "不对个人绩效作评价", "需保持复测订单难度和测时口径一致"],
+            "timing": {"title": "设备测时校准", "note": "采集器换电重启后刻度归零，刻度快慢随校时段变化；测时须按设备与开机批号登记校时依据，分段换算为秒并全批通过后才放行。",
+                       "record_columns": [{"key": "operator", "label": "匿名作业员"}, {"key": "team", "label": "试点小组"}, {"key": "device", "label": "采集设备"}, {"key": "boot_no", "label": "开机批号"}, {"key": "before_start", "label": "原路线起始刻度"}, {"key": "before_end", "label": "原路线结束刻度"}, {"key": "after_start", "label": "新路线起始刻度"}, {"key": "after_end", "label": "新路线结束刻度"}],
+                       "segment_columns": [{"key": "start_tick", "label": "起始刻度"}, {"key": "end_tick", "label": "结束刻度"}, {"key": "seconds_per_tick", "label": "每刻度秒数"}]}}
 
 
 def seed_records():
